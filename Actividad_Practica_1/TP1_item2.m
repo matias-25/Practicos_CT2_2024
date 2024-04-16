@@ -5,12 +5,6 @@ t = [A(:,1)]; %tiempo en segundos
 i = [A(:,2)]; %corriente 
 v = [A(:,3)]; %tension en el capacitor
 
-figure(1);
-subplot(2,1,1);
-plot(t,i); title('Corriente'); grid on;
-subplot(2,1,2);
-plot(t,v);title('Tension en el capacitor, salida y'); grid on;
-
 StepAmplitude=12;
 
 t_s=t(100:500)-0.01; %dezplazo el eje t, para analizar la seccion del escalon positivo
@@ -53,11 +47,15 @@ y_id=StepAmplitude*step(sys_G_ang , t_s );
 %cin =condiciones iniciales nulas
 imax_cin=0;
 timax_cin=0;
+tam_tv=0;
 for jj=1:1:length(t)-1
     if i(jj+1)>=i(jj) && timax_cin==0
     imax_cin=i(jj);
     else 
     timax_cin=t(jj); 
+    end
+    if v(jj)>0 && tam_tv==0
+        tam_tv=jj-1;
     end
 end
 V=12;
@@ -69,6 +67,21 @@ L=(aux_den(1))/C;
 num_cal=[0 0 1];
 den_cal=[L*C R*C 1];
 G_Resul= tf(num_cal,den_cal);
+u_=12*square(2*pi*10*t);
+u=[zeros(tam_tv-1,1); u_(tam_tv:end)];
+ycal=lsim(G_Resul, u,t);
+disp('R=');
+disp(R);
+disp('L=');
+disp(L);
+disp('C=');
+disp(C);
+
+figure(1);
+subplot(2,1,1);
+plot(t,i,'r'); title('Corriente'); grid on; 
+subplot(2,1,2);
+plot(t,v);title('Tension en el capacitor, salida y'); grid on; hold on; plot(t,ycal,'c');
 
 figure(2);
 plot(t_s,v_s,'r'),hold on
