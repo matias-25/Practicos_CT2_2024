@@ -35,7 +35,7 @@ u=[zeros(1,kk), u_(kk+1:end)];
 for t_e=0:t_etapa:tF 
     ii=ii+1;
      X=mod_RLC_3(t_etapa, X, u(ii),t1); 
-    x1(ii)=X(1);%Voltaje en el Capacitor
+    x1(ii)=X(1)/C;%Voltaje en el Capacitor
     x2(ii)=X(2);%Corriente del Inductor
     acc(ii)=u(ii);
 end
@@ -47,5 +47,5 @@ plot(t_mio,x2);hold on; plot(t,i,'r');title('Corriente-CALCULADA vs Corriente-ME
 subplot(3,1,2);
 plot(t,acc);title('Voltaje Aplicado'); grid on
 subplot(3,1,3); 
-plot(t,x1);%hold on;plot(t,v,'g'); title('Voltaje en el capacitor vs v-MEDIDO Verde'); grid on
+plot(t,x1);hold on;plot(t,v,'g'); title('Voltaje en el capacitor vs v-MEDIDO Verde'); grid on
 xlabel('Tiempo [Seg.]');
