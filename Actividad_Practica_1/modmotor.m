@@ -10,8 +10,8 @@ wp=xant(3);
 for ii=1:t_etapa/h 
  wpp =(-wp*(Ra*J+Laa*B)-omega*(Ra*B+Ki*Km)+Va*Ki-Laa*TLp-Ra*TL)/(J*Laa);
  wp=wp+h*wpp;
+ omega = omega + h*wp;
  iap=(-Ra*ia-Km*omega+Va)/Laa;
  ia=ia+iap*h;
- omega = omega + h*wp;
-end
+ end
 X=[ia,omega,wp];
