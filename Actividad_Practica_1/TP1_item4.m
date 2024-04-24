@@ -1,5 +1,5 @@
 clear;close all;
-X=-[0;0;0];ii=0;t_etapa=1e-5;tF=5;
+X=-[0;0;0];ii=0;t_etapa=1e-7;tF=5;
 u=12;
 t=0:t_etapa:tF;
 TL=(1.4e-3)*(t>=1);

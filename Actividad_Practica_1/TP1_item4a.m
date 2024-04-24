@@ -8,7 +8,7 @@ w=zeros(1,length(t));
 
 for t_eu=0:t_etapa:tF
  ii=ii+1;
- X=modmotor(t_etapa, X, [u,V_TL(ii)]);
+ X=modmotor_1(t_etapa, X, [u,V_TL(ii)]);
  x1(ii)=X(1);%Omega
  x2(ii)=X(2);%wp
  acc(ii)=u;
