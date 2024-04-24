@@ -12,7 +12,7 @@ for t_eu=0:t_etapa:tF
  x1(ii)=X(1);%Omega
  x2(ii)=X(2);%wp
  acc(ii)=u;
- if x1(ii)>=0 && x1(ii)<0.1 && t_eu>0.1
+ if x1(ii)>=-0.1 && x1(ii)<=0.1 && t_eu>0.1
      w(ii)=x1(ii);
      disp('Torque Max');
      disp(V_TL(ii));
