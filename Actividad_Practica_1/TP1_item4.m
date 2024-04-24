@@ -1,19 +1,22 @@
 clear;close all;
-X=-[0; 0];ii=0;t_etapa=1e-7;tF=.5;
+X=-[0;0;0];ii=0;t_etapa=1e-5;tF=5;
 u=12;
-TL=1.409352518e-3;
-for t=0:t_etapa:tF
+t=0:t_etapa:tF;
+TL=(1.4e-3)*(t>=1);
+for t_eu=0:t_etapa:tF
  ii=ii+1;k=ii+2;
- X=modmotor(t_etapa, X, [u,TL]);
- x1(ii)=X(1);%Omega
- x2(ii)=X(2);%wp
+ X=modmotor(t_etapa, X, [u,TL(ii)]);
+ x1(ii)=X(1);%ia
+ x2(ii)=X(2);%Omega
+ x3(ii)=X(3);%wp
  acc(ii)=u;
 end
-t=0:t_etapa:tF;
-subplot(2,1,1);hold on;
-plot(t,x1,'r');title('Salida y, \omega_t');
-subplot(2,1,2);hold on;
-plot(t,acc,'r');title('Entrada u_t, v_a');
+subplot(3,1,1);
+plot(t,x1,'r');title('Corriente');
+subplot(3,1,2);
+plot(t,x2,'r');title('Salida y, \omega_t');
+subplot(3,1,3);
+plot(t,acc,'r');hold on;plot(t,10e3*TL,'b'); title('Entrada v_a (rojo) , Torque (Azul, elcala 10e3)');
 xlabel('Tiempo [Seg.]');
 % % Para verificar
 % Laa=366e-6;
