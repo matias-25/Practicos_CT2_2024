@@ -25,16 +25,17 @@ wRef=2000;
 %Kp=.500;Ki=0.001;Kd=0.0001;color_='r';
 % Kp=1;Ki=0;Kd=0.0001;color_='k';
 % Kp=10;Ki=0;Kd=0;color_='b';
-Kp=0.005;Ki=1e-1;Kd=1e-9;color_='c';
+Kp=0.004;Ki=1;Kd=1e-9;color_='c';
 Ts=t_etapa;
 A1=((2*Kp*Ts)+(Ki*(Ts^2))+(2*Kd))/(2*Ts);
 B1=(-2*Kp*Ts+Ki*(Ts^2)-4*Kd)/(2*Ts);
 C1=Kd/Ts;
 e=zeros(uint64(tF/t_etapa),1);
 u=0;ii=0; %reinicio mis variables
+Amp_op=10;
 for t_eu2=0:t_etapa:tF
  ii=ii+1;k=ii+2;
- X=modmotor(t_etapa, X, [u,TL(ii)]);
+ X=modmotor(t_etapa, X, [u*Amp_op,TL(ii)]);
  e(k)=wRef-X(2); %ERROR
  u=u+A1*e(k)+B1*e(k-1)+C1*e(k-2); %PID
  x1(ii)=X(1);%ia
@@ -49,5 +50,5 @@ plot(t,x1,'r');title('Corriente');
 subplot(3,1,2);
 plot(t,x2,'r');title('Salida y, \omega_t');
 subplot(3,1,3);
-plot(t,acc,color_);hold on;plot(t,10e3*TL,'b'); title('Entrada v_a (rojo) , Torque (Azul, elcala 10e3)');
+plot(t,acc,color_);hold on;plot(t,1e3*TL,'b'); title('Entrada v_a (rojo) , Torque (Azul, elcala 1e3)');
 xlabel('Tiempo [Seg.]');
