@@ -20,7 +20,7 @@ subplot(3,1,3);
 plot(t,acc,'r');hold on;plot(t,10e3*TL,'b'); title('Entrada v_a (rojo) , Torque (Azul, elcala 10e3)');
 xlabel('Tiempo [Seg.]');
 
-wRef=2000;
+wRef=1800;
 %Constantes del PID
 %Kp=.500;Ki=0.001;Kd=0.0001;color_='r';
 % Kp=1;Ki=0;Kd=0.0001;color_='k';

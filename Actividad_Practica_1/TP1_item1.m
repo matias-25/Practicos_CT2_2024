@@ -1,5 +1,5 @@
 clear;close all; 
-X=-[0;0];ii=0;t_etapa=1e-9;tF=5e-3;
+X=-[0;0];ii=0;t_etapa=1e-8;tF=5e-3;
 Y=[0;0];
 y=0; %salida
 Ts=t_etapa; 
