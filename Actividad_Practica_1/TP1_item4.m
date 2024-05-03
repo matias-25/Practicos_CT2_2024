@@ -32,10 +32,9 @@ B1=(-2*Kp*Ts+Ki*(Ts^2)-4*Kd)/(2*Ts);
 C1=Kd/Ts;
 e=zeros(uint64(tF/t_etapa),1);
 u=0;ii=0; %reinicio mis variables
-Amp_op=10;
 for t_eu2=0:t_etapa:tF
  ii=ii+1;k=ii+2;
- X=modmotor(t_etapa, X, [u*Amp_op,TL(ii)]);
+ X=modmotor(t_etapa, X, [u,TL(ii)]);
  e(k)=wRef-X(2); %ERROR
  u=u+A1*e(k)+B1*e(k-1)+C1*e(k-2); %PID
  x1(ii)=X(1);%ia
