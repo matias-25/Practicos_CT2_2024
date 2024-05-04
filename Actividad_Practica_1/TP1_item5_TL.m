@@ -16,16 +16,13 @@ plot(t,v_m);title('Tension [V]'); grid on;
 subplot(4,1,4);
 plot(t,TL);title('Torque de Carga [Nm]'); grid on;
 
-%Identificación de la FT del sistema el torque de carga
+%IdentificaciÃ³n de la FT del sistema el torque de carga
 StepTL=1e-3;%de los datos
 t_2=0:0.6/(length(t)-1):0.6;%creo un vector tiempo equidistante
 t_s=t_2(1:16688-16500+1); %seccion del escalon positivo con torque
 w_s=flip(wr(16500:16688)); %se analiza la seccion del Escalon positivo con torque
 y=w_s; 
 t0=t_s;
-%figure(2);
-%plot(t_s,w_s,'r'),hold on
-
 t_inic=3.707e-5; 
 [val lugar] =min(abs(t_inic-t0)); y_t1=y(lugar); 
 t_t1=t0(lugar); 
