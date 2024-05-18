@@ -5,7 +5,7 @@ wr  = A(:,2); %velocidad angular [Rad/seg]
 ia  = A(:,3); %corriente de armadura[A]
 v_m = A(:,4); %Voltaje de entrada
 TL  = A(:,5); %Torque de Carga
-
+iamax=max(ia);
 figure(1);
 subplot(4,1,1);
 plot(t,wr); title('velocidad angular [Rad/seg], wr'); grid on;
@@ -56,9 +56,10 @@ sys_G_ang=tf(K*[T3_ang 1],conv([T1_ang 1],[T2_ang 1]))
 y_id=StepAmplitude*step(sys_G_ang , t_s );
 num_Va=cell2mat(aux_num_Va);
 den_Va=cell2mat(aux_den_Va);
+num_Va(1)=0;
 
 %Identificación de la FT del sistema el torque de carga
-StepTL=1.3e-3;%de los datos
+StepTL=1e-3;%de los datos
 t_2=0:0.6/(length(t)-1):0.6;%creo un vector tiempo equidistante
 t_s_TL=t_2(1:16688-16500+1); %seccion del escalon positivo con torque
 w_s_TL=flip(wr(16500:16688)); %se analiza la seccion del Escalon positivo con torque
@@ -122,3 +123,34 @@ plot(t_s_TL,y_id_TL,'k')
 %step(StepAmplitude*G_Resul,'c');
 legend('Real','Intervalo 1','Intervalo 2','Intervalo 3','Identificada','Con los elemetos calculados'); 
 legend('boxoff');grid on
+
+%Calculos de las constantes
+%de la TF Wr=((Ki/(Ra*B+Ki*Km))*Va-(Ra/(Ra*B+Ki*Km))*TL)/(((J*Laa)/(Ra*B+Ki*Km))*s^2+((Ra*J+Laa*B)/(Ra*B+Ki*Km))*s+1)
+%De la corriente maxima cuando se aplica una entrada de tension de 12V,
+%(hoja de datos), se despeja la Ra
+%Otra consideracion es B=0
+u=12;
+Ra=u/(iamax);
+Km=1/num_Va(3);
+Ki=Ra/(Km*num_TL(3));
+J=(den_Va(2)*Ki*Km)/Ra;
+Laa=(num_TL(2)*Ki*Km);
+
+%constantes_motor(iamax,num_Va(3),num_TL(3),den_Va(2),den_Va(1));
+disp('Ra');
+disp(Ra);
+disp('Km');
+disp(Km);
+disp('Ki');
+disp(Ki);
+disp('J');
+disp(J);
+disp('Laa');
+disp(Laa);
+
+polos=roots(den_Va);
+disp('Polos del FT');
+disp(polos);
+trapido=log(0.95)/real(polos(1));
+disp('Tiempos');
+disp(trapido);
