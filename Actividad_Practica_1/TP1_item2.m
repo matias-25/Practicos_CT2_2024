@@ -7,8 +7,8 @@ v = [A(:,3)]; %tension en el capacitor
 
 StepAmplitude=12;
 
-t_s=t(100:500)-0.01; %dezplazo el eje t, para analizar la seccion del escalon positivo
-v_s=v(100:500); %se analiza la seccion del Escalon positivo 
+t_s=t(101:500)-0.01; %dezplazo el eje t, para analizar la seccion del escalon positivo
+v_s=v(101:500); %se analiza la seccion del Escalon positivo 
 y=v_s; 
 t0=t_s;
 t_inic=0.003; 
@@ -58,10 +58,11 @@ for jj=1:1:length(t)-1
         tam_tv=jj-1;
     end
 end
+%despejo R de la corriente máxima de la curva y lo divido en la entrada escalón,
 V=12;
 R=V/imax_cin;
 aux_den=cell2mat(den);
-
+%despejo de la función de transferencia 
 C=(aux_den(2))/R;
 L=(aux_den(1))/C;
 num_cal=[0 0 1];
@@ -77,13 +78,15 @@ disp(L);
 disp('C=');
 disp(C);
 
-figure(1);
+figure(2);
 subplot(2,1,1);
 plot(t,i,'r'); title('Corriente'); grid on; 
 subplot(2,1,2);
-plot(t,v);title('Tension en el capacitor, salida y'); grid on; hold on; plot(t,ycal,'c');
+plot(t,v,'b');hold on;grid on; plot(t,ycal,'c');title('Tension en el capacitor, salida y'); grid on; 
+legend('Medida','Calculada'); 
+legend('boxoff');
 
-figure(2);
+figure(1);
 plot(t_s,v_s,'r'),hold on
 plot(t_t1,y_t1,'.')
 plot(t_2t1,y_2t1,'*')
