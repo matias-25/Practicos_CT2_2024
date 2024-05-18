@@ -2,8 +2,7 @@ function [X]=mod_RLC_1(t_etapa, xant, accion)
 R=47; L=1e-6; C=100e-9;
 A=[-R/L -1/L; 1/C 0];
 B=[1/L;0];
-%Y=0;
-At=1e-9; %At=1e-10, pero le pongo 10veces menos porque mi compu no lo soporta
+At=1e-9; %At=1e-13, el tiempo calculado
 x=xant; 
 u=accion; %v_e
 for ii=1:t_etapa/At     
