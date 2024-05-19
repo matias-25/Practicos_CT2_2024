@@ -1,5 +1,5 @@
 clear;close all;
-X=-[0;0;0;0];ii=0;t_etapa=1e-6;tF=1;
+X=-[0;0;0;0];ii=0;t_etapa=1e-5;tF=1;
 u=12;
 t=0:t_etapa:tF;
 %TL=(((1.4e-3)/2)*square(2*pi*0.5*t)+((1.4e-3)/2)).*(t>=1);
@@ -15,13 +15,14 @@ for t_eu=0:t_etapa:tF
 end
 figure(1)
 subplot(4,1,1);
-plot(t,x1,'r');title('Corriente');
+plot(t,x1,'r');title('Corriente'); grid on;
 subplot(4,1,2);
-plot(t,x2,'r');title(' \omega_t');
+plot(t,x2,'r');title(' \omega_t'); grid on;
 subplot(4,1,3);
-plot(t,acc,'r');hold on;plot(t,10e3*TL,'b'); title('Entrada v_a (rojo) , Torque (Azul, elcala 10e3)');
+plot(t,acc,'r');hold on;plot(t,10e3*TL,'b'); title('Entradas'); grid on;
+legend('v_a ','Torque (elcala 10e3)');
 subplot(4,1,4);
-plot(t,x4,'r');title('Salida y, \theta');
+plot(t,x4,'r');title('Salida y, \theta'); grid on;
 xlabel('Tiempo [Seg.]');
 
 titaRef=1; %radian
@@ -53,7 +54,8 @@ plot(t,x1,'r');grid on; title('Corriente');
 subplot(4,1,2);
 plot(t,x2,'r');grid on;title('\omega_t');
 subplot(4,1,3);
-plot(t,acc,color_);grid on;hold on;plot(t,1e3*TL,'b'); title('Entrada v_a (rojo) , Torque (Azul, elcala 1e3)');
+plot(t,acc,'r');hold on;plot(t,10e3*TL,'b'); title('Entradas'); grid on;
+legend('v_a ','Torque (elcala 10e3)');
 subplot(4,1,4);
 plot(t,x4,'r');grid on;title('Salida y, \theta');
 xlabel('Tiempo [Seg.]');
