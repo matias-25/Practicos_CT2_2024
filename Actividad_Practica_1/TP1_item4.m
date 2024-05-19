@@ -17,7 +17,9 @@ plot(t,x1,'r');title('Corriente');
 subplot(3,1,2);
 plot(t,x2,'r');title('Salida y, \omega_t');
 subplot(3,1,3);
-plot(t,acc,'r');hold on;plot(t,10e3*TL,'b'); title('Entrada v_a (rojo) , Torque (Azul, elcala 10e3)');
+plot(t,acc,'r');hold on;plot(t,1e3*TL,'b'); title(' Entradas ');
+legend('v_a','Torque (elcala 1e3)'); grid on
+legend('boxoff');
 xlabel('Tiempo [Seg.]');
 
 wRef=1800;
@@ -49,5 +51,7 @@ plot(t,x1,'r');title('Corriente');
 subplot(3,1,2);
 plot(t,x2,'r');title('Salida y, \omega_t');
 subplot(3,1,3);
-plot(t,acc,color_);hold on;plot(t,1e3*TL,'b'); title('Entrada v_a (rojo) , Torque (Azul, elcala 1e3)');
+plot(t,acc,color_);hold on;plot(t,1e3*TL,'b'); title(' Entradas ');
+legend('v_a','Torque (elcala 1e3)'); grid on
+legend('boxoff');
 xlabel('Tiempo [Seg.]');
