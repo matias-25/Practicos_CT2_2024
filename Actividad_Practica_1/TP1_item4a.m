@@ -24,7 +24,7 @@ end
 subplot(2,1,1);hold on;
 plot(t,x1,'r');hold on;plot(t,w);  ylim([-10 2000]); grid on;title('Salida y, \omega_t');
 subplot(2,1,2);hold on;
-plot(t,V_TL,'r');title('Totque de Carca');
+plot(t,V_TL,'r');title('Torque de Carca');
 xlabel('Tiempo [Seg.]');
 % % Para verificar
 % Laa=366e-6;
