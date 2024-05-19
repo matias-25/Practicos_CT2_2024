@@ -43,9 +43,14 @@ end
 
 figure(1);
 subplot(3,1,1);
-plot(t_mio,x2);hold on; plot(t,i,'r');title('Corriente-CALCULADA vs Corriente-MEDIDA Rojo'); grid on 
+plot(t,i,'r');hold on;plot(t_mio,x2);title('Corriente');
+legend('Medida','Calculada'); grid on
+legend('boxoff');
 subplot(3,1,2);
 plot(t,acc);title('Voltaje Aplicado'); grid on
 subplot(3,1,3); 
-plot(t,x1);hold on;plot(t,v,'g'); title('Voltaje en el capacitor vs v-MEDIDO Verde'); grid on
+plot(t,v,'g');hold on;plot(t,x1); title('Voltaje en el capacitor');
+legend('Medido','Calculado'); grid on
+legend('boxoff');
+
 xlabel('Tiempo [Seg.]');
