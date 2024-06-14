@@ -20,8 +20,8 @@ Mat_A=expm(Mat_Ac*Ts);eig(Mat_A)
 Mat_Aa=[Mat_A zeros(3,1);-Mat_C*Mat_A, 1];
 Mat_Ba=[Mat_B;-Mat_C*Mat_B];
 Q=diag([1e0 1e-3 1e1 1e5]);
-R=1e3; %Nótese con R=1 no cumple restricciones de u
-%Contrucción del Hamiltoniano para el cálculo del controlador
+R=1e3; %NÃ³tese con R=1 no cumple restricciones de u
+%ContrucciÃ³n del Hamiltoniano para el cÃ¡lculo del controlador
 H=[Mat_Aa -Mat_Ba*inv(R)*Mat_Ba'; -Q -Mat_Aa'];
 [V,D]=eig(H);MX1X2=[];
 for ii=1:8
@@ -34,7 +34,7 @@ P=real(MX2*inv(MX1));
 Ka=inv(R+Mat_Ba'*P*Mat_Ba)*Mat_Ba'*P*Mat_Aa;
 aut_controlador=abs(eig(Mat_Aa-Mat_Ba*Ka));
 Mat_A_O=Mat_A';Mat_B_O=Mat_C';Qo=diag([1e-1 1e-2 1e0]);Ro=1e-1;
-%Contrucción del Hamiltoniano para el cálculo del controlador
+%ContrucciÃ³n del Hamiltoniano para el cÃ¡lculo del controlador
 Ho=[Mat_A_O -Mat_B_O*inv(Ro)*Mat_B_O'; -Qo -Mat_A_O'];
 [Vo,Do]=eig(Ho);MX1X2=[];
 for ii=1:6
