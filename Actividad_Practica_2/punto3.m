@@ -75,7 +75,7 @@ for ki=2:KMAX+1
  Y_=Mat_C*x;
  ve1(ki)=ve1(ki-1)+ref1-Y_(1);
  ve2(ki)=ve2(ki-1)+ref2-Y_(2);
- u1(ki)=-Ka*[x_hat+xop;ve1(ki)];
+ u1(ki)=-Ka*[x_hat;ve1(ki)];
  if abs(u1(ki))<zona_muerta
  u1(ki)=0;
  else
@@ -97,8 +97,8 @@ for ki=2:KMAX+1
  ref1=0;
  m=1;
  end
- x_hat=Mat_A*(x_hat-xop)+Mat_B*u1(ki)+Kobs*(Y_-y_hat);
- y_hat=Mat_C*(x_hat);
+ x_hat=Mat_A*(x_hat-xop)+Mat_B*u1(ki)+Kobs*(Y_-y_hat)+xop;
+ y_hat=Mat_C*(x_hat+xop);
 end
 u(i)=u1(ki);t=(1:i)*h;
 figure(2);
